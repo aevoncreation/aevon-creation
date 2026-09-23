@@ -1,0 +1,8 @@
+{
+  "name": "aevon-creation",
+  "version": "1.0.0",
+  "description": "Aevon Creation jewellery website",
+  "scripts": {
+    "build": "node build.js"
+  }
+}

@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aevon Creation — Handmade Jewellery</title>
+<meta name="description" content="Aevon Creation — handmade, dainty everyday jewellery. Gold plated & platinum plated pieces. Order easily on WhatsApp.">
+
+<!-- ============================================================
+     AEVON CREATION — Jewellery Showcase Site
+     No payment. Orders go to WhatsApp: +91 9099774500
+     To edit products: scroll to the <script> PRODUCTS array below.
+     ============================================================ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ivory:#F6F2EC;
+  --champagne:#EDE3D3;
+  --ink:#2A2622;
+  --stone:#8B8178;
+  --rose:#3A3632;      /* dark charcoal accent (was rose-gold) */
+  --rose-deep:#1A1815; /* near-black accent */
+  --line:#DED4C4;
+  --wa:#25D366;
+  --radius:2px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Jost',sans-serif;
+  background:var(--ivory);
+  color:var(--ink);
+  line-height:1.6;
+  font-weight:300;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:'Fraunces',serif;font-weight:400;letter-spacing:-0.01em}
+a{color:inherit;text-decoration:none}
+img{display:block;width:100%;height:100%;object-fit:cover}
+
+/* ---------- Announcement bar ---------- */
+.announce{
+  background:var(--ink);color:var(--ivory);
+  text-align:center;font-size:.72rem;letter-spacing:.18em;
+  text-transform:uppercase;padding:.6rem 1rem;font-weight:400;
+}
+.announce span{display:inline-block;transition:opacity .4s ease}
+.announce span.fade{opacity:0}
+
+/* ---------- Header ---------- */
+header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(246,242,236,.88);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.nav{
+  max-width:1200px;margin:0 auto;padding:1rem 1.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.brand{
+  font-family:'Fraunces',serif;font-size:1.5rem;letter-spacing:.02em;
+  display:flex;flex-direction:column;line-height:1;
+}
+.brand-logo{width:auto;height:44px;object-fit:contain}
+.brand small{
+  font-family:'Jost',sans-serif;font-size:.58rem;letter-spacing:.42em;
+  text-transform:uppercase;color:var(--stone);margin-top:.35rem;font-weight:400;
+}
+.nav-links{display:flex;gap:2rem;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;margin-left:auto}
+.nav-links a{position:relative;padding-bottom:2px;transition:color .2s}
+.nav-links a::after{
+  content:"";position:absolute;left:0;bottom:0;width:0;height:1px;
+  background:var(--rose);transition:width .3s;
+}
+.nav-links a:hover{color:var(--rose-deep)}
+.nav-links a:hover::after{width:100%}
+.nav-icons{display:flex;align-items:center;gap:.6rem;margin-left:2rem}
+.icon-btn{
+  position:relative;background:none;border:none;cursor:pointer;color:var(--ink);
+  width:40px;height:40px;display:flex;align-items:center;justify-content:center;
+  border-radius:50%;transition:background .2s;
+}
+.icon-btn:hover{background:var(--champagne)}
+.icon-btn svg{width:21px;height:21px}
+.wish-count{
+  position:absolute;top:2px;right:2px;background:var(--rose-deep);color:#fff;
+  font-size:.6rem;min-width:16px;height:16px;border-radius:8px;padding:0 4px;
+  display:flex;align-items:center;justify-content:center;font-weight:500;
+}
+.wish-count.empty{display:none}
+.menu-btn{display:none;background:none;border:none;cursor:pointer;font-size:1.4rem;color:var(--ink);width:40px;height:40px}
+
+/* ---------- Search overlay ---------- */
+.search-overlay{
+  position:fixed;inset:0;background:rgba(42,38,34,.55);backdrop-filter:blur(4px);
+  z-index:120;display:none;justify-content:center;align-items:flex-start;padding:6rem 1.5rem 1.5rem;
+}
+.search-overlay.open{display:flex}
+.search-box{background:var(--ivory);max-width:640px;width:100%;border-radius:var(--radius);padding:1.5rem;position:relative;max-height:80vh;display:flex;flex-direction:column}
+.search-close{position:absolute;top:.8rem;right:.8rem;background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--stone)}
+.search-field{display:flex;align-items:center;gap:.7rem;border-bottom:2px solid var(--ink);padding:.6rem .2rem;margin:1rem 1.5rem 1.2rem 0}
+.search-field svg{width:22px;height:22px;color:var(--stone);flex-shrink:0}
+.search-field input{flex:1;border:none;background:none;font-family:'Jost',sans-serif;font-size:1.05rem;color:var(--ink);outline:none}
+.search-results{overflow-y:auto;display:flex;flex-direction:column;gap:.6rem}
+.search-item{display:flex;align-items:center;gap:1rem;padding:.6rem;border-radius:var(--radius);cursor:pointer;transition:background .2s}
+.search-item:hover{background:var(--champagne)}
+.search-item img{width:52px;height:52px;object-fit:cover;border-radius:var(--radius);flex-shrink:0}
+.search-item .si-name{font-size:.95rem}
+.search-item .si-price{font-size:.85rem;color:var(--stone)}
+.search-empty{color:var(--stone);font-size:.9rem;padding:1rem .6rem;text-align:center}
+
+/* ---------- Wishlist drawer ---------- */
+.wish-overlay{position:fixed;inset:0;background:rgba(42,38,34,.55);backdrop-filter:blur(4px);z-index:120;display:none}
+.wish-overlay.open{display:block}
+.wish-panel{position:absolute;top:0;right:0;height:100%;width:380px;max-width:90vw;background:var(--ivory);display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.15)}
+.wish-head{display:flex;align-items:center;justify-content:space-between;padding:1.5rem;border-bottom:1px solid var(--line)}
+.wish-head h3{font-size:1.3rem;font-weight:400}
+.wish-close{background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--stone)}
+.wish-body{flex:1;overflow-y:auto;padding:1rem 1.5rem}
+.wish-row{display:flex;gap:1rem;padding:.9rem 0;border-bottom:1px solid var(--line);align-items:center}
+.wish-row img{width:60px;height:60px;object-fit:cover;border-radius:var(--radius);flex-shrink:0}
+.wish-row .wr-info{flex:1}
+.wish-row .wr-name{font-size:.95rem;margin-bottom:.2rem}
+.wish-row .wr-price{font-size:.85rem;color:var(--stone)}
+.wish-row .wr-remove{background:none;border:none;color:var(--stone);cursor:pointer;font-size:1rem;padding:.3rem}
+.wish-row .wr-remove:hover{color:var(--rose-deep)}
+.wish-empty{text-align:center;color:var(--stone);padding:3rem 1rem;font-size:.95rem}
+
+/* ---------- Product card heart ---------- */
+.card-heart{
+  position:absolute;top:.7rem;right:.7rem;z-index:3;
+  width:34px;height:34px;border-radius:50%;background:rgba(246,242,236,.9);
+  border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:transform .2s,background .2s;
+}
+.card-heart:hover{transform:scale(1.12)}
+.card-heart svg{width:18px;height:18px;stroke:var(--ink);fill:none;stroke-width:1.7;transition:all .2s}
+.card-heart.active svg{fill:var(--rose-deep);stroke:var(--rose-deep)}
+
+/* ---------- Hero (full-width slideshow) ---------- */
+.eyebrow{
+  font-size:.7rem;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--rose-deep);margin-bottom:1.4rem;
+}
+.hero-full{
+  position:relative;width:100%;height:82vh;min-height:520px;max-height:900px;
+  overflow:hidden;
+}
+.slideshow{position:absolute;inset:0}
+.slide{
+  position:absolute;inset:0;background-size:cover;background-position:center;
+  background-repeat:no-repeat;background-color:var(--ivory);
+  opacity:0;transition:opacity 1.2s ease;
+}
+.slide.active{opacity:1}
+.hero-full::after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:2;
+  background:linear-gradient(to bottom,rgba(0,0,0,.05),transparent 25%,transparent 70%,rgba(0,0,0,.18));
+}
+.slide-dots{
+  position:absolute;bottom:1.4rem;left:50%;transform:translateX(-50%);
+  display:flex;gap:.5rem;z-index:3;
+}
+.slide-dots button{
+  width:8px;height:8px;border-radius:50%;border:none;cursor:pointer;padding:0;
+  background:rgba(255,255,255,.6);transition:all .3s;
+}
+.slide-dots button.active{background:#fff;width:22px;border-radius:4px}
+.hero-scroll{
+  position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);z-index:3;
+  display:flex;flex-direction:column;align-items:center;gap:.4rem;
+  color:#fff;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;
+  text-shadow:0 1px 6px rgba(0,0,0,.3);
+}
+.hero-scroll svg{width:22px;height:22px;animation:bounce 1.8s infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:.6rem;
+  padding:.85rem 1.7rem;font-size:.8rem;letter-spacing:.14em;
+  text-transform:uppercase;cursor:pointer;border:none;
+  transition:all .25s;font-family:'Jost',sans-serif;font-weight:400;
+}
+.btn-dark{background:var(--ink);color:var(--ivory)}
+.btn-dark:hover{background:var(--rose-deep)}
+.btn-outline{background:transparent;border:1px solid var(--ink);color:var(--ink)}
+.btn-outline:hover{background:var(--ink);color:var(--ivory)}
+.btn-wa{background:var(--wa);color:#fff;width:100%;justify-content:center}
+.btn-wa:hover{filter:brightness(.94)}
+
+/* ---------- Section shells ---------- */
+section{max-width:1200px;margin:0 auto;padding:5rem 1.5rem}
+.sec-head{text-align:center;margin-bottom:3rem}
+.sec-head .eyebrow{margin-bottom:.9rem}
+.sec-head h2{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:300}
+
+/* ---------- Collections strip ---------- */
+.collections{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.coll-card{
+  position:relative;aspect-ratio:3/4;overflow:hidden;border-radius:var(--radius);
+  cursor:pointer;
+}
+.coll-card img{transition:transform .7s ease}
+.coll-card:hover img{transform:scale(1.06)}
+.coll-card .label{
+  position:absolute;inset:0;display:flex;align-items:flex-end;
+  padding:1.4rem;color:#fff;
+  background:linear-gradient(to top,rgba(42,38,34,.6),transparent 55%);
+  font-family:'Fraunces',serif;font-size:1.3rem;letter-spacing:.02em;
+}
+
+/* ---------- Filter bar ---------- */
+.filters{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.6rem}
+.filter{
+  padding:.5rem 1.2rem;font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--line);background:transparent;cursor:pointer;
+  transition:all .2s;color:var(--stone);font-family:'Jost',sans-serif;border-radius:99px;
+}
+.filter.active,.filter:hover{background:var(--ink);color:var(--ivory);border-color:var(--ink)}
+
+/* ---------- Product grid ---------- */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.6rem 1.3rem}
+.card{cursor:pointer;transition:transform .3s}
+.card-img{
+  aspect-ratio:1;overflow:hidden;border-radius:var(--radius);
+  background:var(--champagne);margin-bottom:.9rem;position:relative;
+}
+.card-img img{transition:transform .6s ease}
+.card:hover .card-img img{transform:scale(1.05)}
+.badge{
+  position:absolute;top:.7rem;left:.7rem;background:var(--ivory);
+  font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;
+  padding:.3rem .6rem;color:var(--rose-deep);
+}
+.card h3{font-size:.95rem;font-weight:400;margin-bottom:.2rem;line-height:1.25}
+.card .price{font-size:.92rem;color:var(--stone)}
+.card .cat{font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--rose);margin-bottom:.35rem}
+
+/* ---------- Modal ---------- */
+.modal-bg{
+  position:fixed;inset:0;background:rgba(42,38,34,.55);backdrop-filter:blur(4px);
+  z-index:100;display:none;align-items:center;justify-content:center;padding:1.5rem;
+}
+.modal-bg.open{display:flex}
+.modal{
+  background:var(--ivory);max-width:840px;width:100%;max-height:90vh;overflow:auto;
+  display:grid;grid-template-columns:1fr 1fr;border-radius:var(--radius);position:relative;
+}
+.modal-img{aspect-ratio:1;background:var(--champagne);position:relative;display:flex;flex-direction:column}
+.modal-img #mMainImg{flex:1;min-height:0}
+.thumbs{display:flex;gap:.5rem;padding:.6rem;background:var(--ivory)}
+.thumb{width:54px;height:54px;border-radius:var(--radius);overflow:hidden;cursor:pointer;border:2px solid transparent;opacity:.65;transition:all .2s;flex-shrink:0}
+.thumb.active,.thumb:hover{opacity:1;border-color:var(--rose)}
+.modal-info{padding:2.4rem 2.2rem;display:flex;flex-direction:column}
+.modal-info .cat{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);margin-bottom:.7rem}
+.modal-info h2{font-size:1.7rem;font-weight:300;margin-bottom:.5rem;line-height:1.1}
+.modal-info .price{font-size:1.3rem;color:var(--ink);margin-bottom:1.4rem;font-family:'Fraunces',serif}
+.modal-info .desc{color:var(--stone);font-size:.92rem;margin-bottom:1.2rem}
+.modal-info .detail-list{list-style:none;margin-bottom:1.8rem;font-size:.86rem}
+.modal-info .detail-list li{padding:.5rem 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;color:var(--stone)}
+.modal-info .detail-list li span{color:var(--ink)}
+.modal-close{
+  position:absolute;top:1rem;right:1rem;background:var(--ivory);border:1px solid var(--line);
+  width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:1.1rem;line-height:1;color:var(--ink);z-index:2;
+}
+.modal-wa-note{font-size:.72rem;color:var(--stone);text-align:center;margin-top:.8rem;letter-spacing:.03em}
+
+/* ---------- Trust badges (slideshow) ---------- */
+.trust{background:var(--champagne);padding:3rem 1.5rem}
+.trust-slider{max-width:1000px;margin:0 auto;position:relative;height:150px}
+.trust-item{
+  position:absolute;inset:0;text-align:center;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .8s ease;pointer-events:none;
+}
+.trust-item.active{opacity:1;pointer-events:auto}
+.trust-item svg{width:40px;height:40px;color:var(--rose-deep);margin-bottom:1rem;stroke-linecap:round;stroke-linejoin:round}
+.trust-item h4{font-family:'Fraunces',serif;font-size:1.35rem;font-weight:400;margin-bottom:.4rem}
+.trust-item p{color:var(--stone);font-size:.92rem;max-width:32ch}
+.trust-dots{display:flex;gap:.5rem;justify-content:center;margin-top:1.6rem}
+.trust-dots button{
+  width:8px;height:8px;border-radius:50%;border:none;cursor:pointer;padding:0;
+  background:rgba(42,38,34,.22);transition:all .3s;
+}
+.trust-dots button.active{background:var(--rose-deep);width:22px;border-radius:4px}
+
+/* ---------- Reviews ---------- */
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+.review{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:1.8rem 1.6rem;display:flex;flex-direction:column;
+}
+.review .stars{color:var(--rose);font-size:1rem;letter-spacing:.15em;margin-bottom:.9rem}
+.review .text{font-size:.95rem;color:var(--ink);line-height:1.65;margin-bottom:1.3rem;flex:1;font-style:italic}
+.review .who{display:flex;align-items:center;gap:.7rem}
+.review .avatar{
+  width:38px;height:38px;border-radius:50%;background:var(--champagne);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fraunces',serif;color:var(--rose-deep);font-size:1.05rem;flex-shrink:0;
+}
+.review .name{font-size:.9rem;font-weight:500}
+.review .role{font-size:.75rem;color:var(--stone)}
+.about{background:var(--champagne);max-width:none;margin:0;padding:5rem 1.5rem}
+.about-inner{max-width:760px;margin:0 auto;text-align:center}
+.about-inner h2{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:300;margin-bottom:1.4rem}
+.about-inner p{color:var(--ink);font-size:1.05rem;opacity:.85;margin-bottom:1rem}
+
+/* ---------- Contact ---------- */
+.contact-wrap{
+  max-width:1000px;margin:3rem auto 0;
+  display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;align-items:stretch;
+}
+.contact-cards{display:grid;grid-template-rows:1fr 1fr;gap:1.4rem}
+.contact-card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:1.8rem;display:flex;flex-direction:column;
+}
+.contact-ic{
+  width:44px;height:44px;border-radius:50%;background:var(--champagne);
+  display:flex;align-items:center;justify-content:center;margin-bottom:1rem;
+}
+.contact-ic svg{width:22px;height:22px;color:var(--rose-deep);stroke-linecap:round;stroke-linejoin:round}
+.contact-card h4{font-family:'Fraunces',serif;font-size:1.15rem;font-weight:400;margin-bottom:.4rem}
+.contact-card p{color:var(--stone);font-size:.95rem;line-height:1.6}
+.contact-card a{color:var(--ink);border-bottom:1px solid var(--line);transition:border-color .2s}
+.contact-card a:hover{border-color:var(--rose-deep)}
+.contact-cta{
+  background:var(--ink);color:var(--ivory);border-radius:var(--radius);
+  padding:2.6rem 2.2rem;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+}
+.contact-cta h3{font-size:1.6rem;font-weight:300;margin-bottom:.6rem}
+.contact-cta p{color:#B8AEA3;font-size:.92rem;margin-bottom:1.6rem;max-width:28ch}
+.contact-cta .btn-wa{max-width:260px;width:100%}
+
+/* ---------- Footer ---------- */
+footer{background:#000;color:var(--ivory);padding:4rem 1.5rem 2rem}
+.foot-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:3rem}
+.foot-brand{font-family:'Fraunces',serif;font-size:1.6rem;margin-bottom:.8rem}
+.foot-logo{width:auto;height:56px;object-fit:contain;margin-bottom:1.1rem}
+.foot-inner p{color:#B8AEA3;font-size:.9rem;max-width:32ch}
+.foot-col h4{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:1.1rem;color:#D8CEC3;font-family:'Jost';font-weight:500}
+.foot-col a{display:block;color:#B8AEA3;font-size:.9rem;padding:.3rem 0;transition:color .2s}
+.foot-col a:hover{color:var(--rose)}
+.social-icons{display:flex;gap:.8rem;margin-top:.2rem}
+.social-icons a{
+  width:40px;height:40px;border:1px solid rgba(255,255,255,.22);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;padding:0;
+  transition:all .25s;color:#D8CEC3;
+}
+.social-icons a:hover{background:var(--rose);border-color:var(--rose);color:#fff}
+.social-icons svg{width:18px;height:18px}
+.foot-bottom{max-width:1200px;margin:0 auto;padding-top:1.6rem;border-top:1px solid rgba(255,255,255,.1);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-size:.78rem;color:#8B8178}
+
+/* ---------- Floating WhatsApp ---------- */
+.wa-float{
+  position:fixed;bottom:5rem;right:1.4rem;z-index:60;
+  width:60px;height:60px;border-radius:15px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 20px rgba(37,211,102,.45);transition:transform .2s;
+}
+.wa-float:hover{transform:scale(1.08)}
+.wa-float svg{width:60px;height:60px;display:block}
+
+/* ---------- Reveal animation ---------- */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- Responsive ---------- */
+@media(max-width:900px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .reviews-grid{grid-template-columns:1fr}
+  .hero-full{height:auto;min-height:0;max-height:none;aspect-ratio:16/10}
+  .hero-full .slide{background-size:contain}
+  .hero-scroll{display:none}
+  .contact-wrap{grid-template-columns:1fr}
+  .collections{grid-template-columns:1fr;gap:1rem}
+  .coll-card{aspect-ratio:16/9}
+  .modal{grid-template-columns:1fr;max-height:88vh}
+  .modal-img{aspect-ratio:4/3}
+  .foot-inner{grid-template-columns:1fr;gap:2rem}
+  .nav-links{display:none}
+  .menu-btn{display:flex;align-items:center;justify-content:center}
+  .nav-icons{margin-left:auto}
+  .nav-links.show{
+    display:flex;position:absolute;top:100%;left:0;right:0;
+    flex-direction:column;background:var(--ivory);padding:1.5rem;gap:1.2rem;
+    border-bottom:1px solid var(--line);margin-left:0;
+  }
+}
+@media(max-width:520px){
+  .grid{grid-template-columns:repeat(2,1fr);gap:1.2rem .8rem}
+  section{padding:3.5rem 1.2rem}
+  .hero-full{height:auto;min-height:0;aspect-ratio:4/3}
+  .brand-logo{height:36px}
+  .wa-float{bottom:1.4rem;right:1.4rem}
+  .nav-icons{gap:.2rem;margin-left:.5rem}
+  .wish-panel{width:100%}
+}
+</style>
+</head>
+<body>
+
+<div class="announce"><span id="announceText">FREE SHIPPING ON PREPAID ORDERS OVER ₹999</span></div>
+
+<header>
+  <nav class="nav">
+    <a href="#" class="brand"><img src="images/logo-horizontal.png" alt="Aevon Creation" class="brand-logo"></a>
+    <div class="nav-links" id="navLinks">
+      <a href="#shop">Shop</a>
+      <a href="#collections">Collections</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-icons">
+      <button class="icon-btn" id="searchBtn" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4" stroke-linecap="round"/></svg>
+      </button>
+      <button class="icon-btn" id="wishBtn" aria-label="Wishlist">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 20s-7-4.7-7-9.5A3.9 3.9 0 0 1 12 7a3.9 3.9 0 0 1 7 3.5C19 15.3 12 20 12 20z" stroke-linejoin="round"/></svg>
+        <span class="wish-count" id="wishCount">0</span>
+      </button>
+      <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+    </div>
+  </nav>
+</header>
+
+<!-- ============ SEARCH OVERLAY ============ -->
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-box">
+    <button class="search-close" id="searchClose" aria-label="Close">✕</button>
+    <div class="search-field">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4" stroke-linecap="round"/></svg>
+      <input type="text" id="searchInput" placeholder="Search for a piece… e.g. butterfly" autocomplete="off">
+    </div>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
+
+<!-- ============ WISHLIST DRAWER ============ -->
+<div class="wish-overlay" id="wishOverlay">
+  <div class="wish-panel">
+    <div class="wish-head">
+      <h3>Your Wishlist</h3>
+      <button class="wish-close" id="wishClose" aria-label="Close">✕</button>
+    </div>
+    <div class="wish-body" id="wishBody"></div>
+  </div>
+</div>
+
+<!-- ============ HERO (full-width slideshow) ============ -->
+<div class="hero-full">
+  <div class="slideshow" id="slideshow"></div>
+  <div class="slide-dots" id="slideDots"></div>
+  <a href="#shop" class="hero-scroll" aria-label="Scroll to shop">
+    <span>Shop the collection</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+</div>
+
+<!-- ============ COLLECTIONS ============ -->
+<section id="collections">
+  <div class="sec-head reveal">
+    <div class="eyebrow">Shop by category</div>
+    <h2>Collections</h2>
+  </div>
+  <div class="collections" id="collections-grid"></div>
+</section>
+
+<!-- ============ SHOP ============ -->
+<section id="shop">
+  <div class="sec-head reveal">
+    <div class="eyebrow">New in</div>
+    <h2>The Collection</h2>
+  </div>
+  <div class="filters reveal" id="filters"></div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<!-- ============ TRUST BADGES (slideshow) ============ -->
+<div class="trust">
+  <div class="trust-slider" id="trustSlider">
+    <div class="trust-item active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 9h13v8H3z"/><path d="M16 11h3.5L22 14v3h-6"/><circle cx="7" cy="17" r="2"/><circle cx="18" cy="17" r="2"/></svg>
+      <h4>Free Shipping</h4>
+      <p>On all orders above ₹999</p>
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M21 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z"/><circle cx="9" cy="10" r=".6" fill="currentColor"/><circle cx="12.5" cy="10" r=".6" fill="currentColor"/><circle cx="16" cy="10" r=".6" fill="currentColor"/></svg>
+      <h4>Support Online</h4>
+      <p>We're here for you on WhatsApp</p>
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2l7 3v6c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V5z"/><path d="M9 12l2 2 4-4"/></svg>
+      <h4>Trusted Quality</h4>
+      <p>Handmade with care, made to last</p>
+    </div>
+  </div>
+  <div class="trust-dots" id="trustDots"></div>
+</div>
+
+<!-- ============ REVIEWS ============ -->
+<section id="reviews">
+  <div class="sec-head reveal">
+    <div class="eyebrow">Loved by our customers</div>
+    <h2>Reviews</h2>
+  </div>
+  <div class="reviews-grid" id="reviewsGrid"></div>
+</section>
+<div class="about" id="about">
+  <div class="about-inner reveal">
+    <div class="eyebrow" style="text-align:center">Our story</div>
+    <h2>Small batches, made with care</h2>
+    <p>Aevon Creation began with a simple idea — jewellery that feels personal, wears beautifully every day, and never feels mass-produced. Each piece is assembled by hand using 18k gold plated and platinum plated finishes.</p>
+    <p>We keep things simple: browse the pieces you love, and send us a quick message on WhatsApp. We'll confirm your order, share payment details, and take care of the rest.</p>
+  </div>
+</div>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact">
+  <div class="sec-head reveal">
+    <div class="eyebrow">Get in touch</div>
+    <h2>Visit or reach out</h2>
+    <p style="color:var(--stone);max-width:46ch;margin:1rem auto 0">We'd love to help you find your perfect piece. Message us on WhatsApp with the design you love and we'll take it from there.</p>
+  </div>
+  <div class="contact-wrap reveal">
+    <div class="contact-cards">
+      <div class="contact-card">
+        <div class="contact-ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.5"/></svg>
+        </div>
+        <h4>Our Location</h4>
+        <p>Mota Varachha, Surat,<br>Gujarat – 394101</p>
+      </div>
+      <div class="contact-card">
+        <div class="contact-ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 5 5L19 13l2 5v3a1 1 0 0 1-1 1A16 16 0 0 1 4 6a1 1 0 0 1 1-1z" stroke-linejoin="round"/></svg>
+        </div>
+        <h4>Call or WhatsApp</h4>
+        <p><a href="tel:+919099774500">+91 90997 74500</a></p>
+      </div>
+    </div>
+    <div class="contact-cta">
+      <h3>Ready to order?</h3>
+      <p>Tap below to start a chat — quick replies, easy ordering.</p>
+      <a href="#" id="mainWa" class="btn btn-wa">
+        <svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M16.004 2.667C8.64 2.667 2.67 8.637 2.67 16c0 2.35.616 4.63 1.786 6.646L2.55 29.333l6.86-1.793A13.27 13.27 0 0 0 16.004 29.3C23.367 29.3 29.337 23.33 29.337 16S23.367 2.667 16.004 2.667zm7.78 18.926c-.322.908-1.598 1.662-2.617 1.882-.697.148-1.606.266-4.67-1.003-3.917-1.622-6.438-5.6-6.634-5.86-.188-.26-1.583-2.108-1.583-4.02 0-1.913.972-2.85 1.363-3.25.322-.328.697-.477 1.035-.477.113 0 .21.005.297.01.24.01.363.024.523.408.322.774 1.135 2.802 1.232 3.006.098.203.196.478.058.738-.13.266-.242.388-.445.626-.204.238-.396.418-.6.673-.187.22-.396.456-.162.86.235.393 1.045 1.722 2.24 2.787 1.542 1.374 2.792 1.81 3.236 1.996.33.137.723.104.964-.157.306-.336.683-.895 1.066-1.446.272-.393.617-.442.978-.306.367.13 2.356 1.112 2.76 1.312.404.2.67.3.768.47.097.168.097.97-.225 1.878z"/></svg>
+        Chat on WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="foot-inner">
+    <div>
+      <img src="images/logo-horizontal-white.png" alt="Aevon Creation" class="foot-logo">
+      <p>Handmade, dainty everyday jewellery. Gold &amp; platinum plated pieces, made in small batches.</p>
+    </div>
+    <div class="foot-col">
+      <h4>Shop</h4>
+      <a href="#shop">All Pieces</a>
+      <a href="#" onclick="filterTo('Earrings');return false">Earrings</a>
+      <a href="#" onclick="filterTo('Necklaces');return false">Necklaces</a>
+      <a href="#" onclick="filterTo('Bracelets');return false">Bracelets</a>
+    </div>
+    <div class="foot-col">
+      <h4>Policies</h4>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="return-policy.html">Return &amp; Exchange</a>
+      <a href="terms.html">Terms &amp; Conditions</a>
+      <a href="#contact">Contact Us</a>
+    </div>
+    <div class="foot-col">
+      <h4>Follow Us</h4>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/aevon_creation?igsi=MWV6cmZsMmpzbXR6aA%3D%3D&utm_source=qr" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="https://www.facebook.com/share/1D35rSWyRR/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3l.4-3H14V4.5c0-.9.3-1.5 1.6-1.5H17V.4C16.6.3 15.6.2 14.5.2 12 .2 10.3 1.7 10.3 4.4V6H7.5v3h2.8v11H14z"/></svg>
+        </a>
+        <a href="https://youtube.com/@aevoncreation.1?si=5-i0Meo_1XoA6RhX" target="_blank" rel="noopener" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.3-.4-4.8a2.5 2.5 0 0 0-1.8-1.8C19.3 5 12 5 12 5s-7.3 0-8.8.4a2.5 2.5 0 0 0-1.8 1.8C1 8.7 1 12 1 12s0 3.3.4 4.8a2.5 2.5 0 0 0 1.8 1.8C4.7 19 12 19 12 19s7.3 0 8.8-.4a2.5 2.5 0 0 0 1.8-1.8C23 15.3 23 12 23 12zM9.8 15.3V8.7l5.7 3.3z"/></svg>
+        </a>
+        <a href="#" id="footWa" aria-label="WhatsApp">
+          <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.004 2.667C8.64 2.667 2.67 8.637 2.67 16c0 2.35.616 4.63 1.786 6.646L2.55 29.333l6.86-1.793A13.27 13.27 0 0 0 16.004 29.3C23.367 29.3 29.337 23.33 29.337 16S23.367 2.667 16.004 2.667zm7.78 18.926c-.322.908-1.598 1.662-2.617 1.882-.697.148-1.606.266-4.67-1.003-3.917-1.622-6.438-5.6-6.634-5.86-.188-.26-1.583-2.108-1.583-4.02 0-1.913.972-2.85 1.363-3.25.322-.328.697-.477 1.035-.477.113 0 .21.005.297.01.24.01.363.024.523.408.322.774 1.135 2.802 1.232 3.006.098.203.196.478.058.738-.13.266-.242.388-.445.626-.204.238-.396.418-.6.673-.187.22-.396.456-.162.86.235.393 1.045 1.722 2.24 2.787 1.542 1.374 2.792 1.81 3.236 1.996.33.137.723.104.964-.157.306-.336.683-.895 1.066-1.446.272-.393.617-.442.978-.306.367.13 2.356 1.112 2.76 1.312.404.2.67.3.768.47.097.168.097.97-.225 1.878z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Aevon Creation. All rights reserved.</span>
+    <span>AevonCreation.com</span>
+  </div>
+</footer>
+
+<!-- ============ PRODUCT MODAL ============ -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="modal-img" id="mImg"></div>
+    <div class="modal-info">
+      <div class="cat" id="mCat"></div>
+      <h2 id="mName"></h2>
+      <div class="price" id="mPrice"></div>
+      <p class="desc" id="mDesc"></p>
+      <ul class="detail-list" id="mDetails"></ul>
+      <a href="#" class="btn btn-wa" id="mWa">
+        <svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M16.004 2.667C8.64 2.667 2.67 8.637 2.67 16c0 2.35.616 4.63 1.786 6.646L2.55 29.333l6.86-1.793A13.27 13.27 0 0 0 16.004 29.3C23.367 29.3 29.337 23.33 29.337 16S23.367 2.667 16.004 2.667zm7.78 18.926c-.322.908-1.598 1.662-2.617 1.882-.697.148-1.606.266-4.67-1.003-3.917-1.622-6.438-5.6-6.634-5.86-.188-.26-1.583-2.108-1.583-4.02 0-1.913.972-2.85 1.363-3.25.322-.328.697-.477 1.035-.477.113 0 .21.005.297.01.24.01.363.024.523.408.322.774 1.135 2.802 1.232 3.006.098.203.196.478.058.738-.13.266-.242.388-.445.626-.204.238-.396.418-.6.673-.187.22-.396.456-.162.86.235.393 1.045 1.722 2.24 2.787 1.542 1.374 2.792 1.81 3.236 1.996.33.137.723.104.964-.157.306-.336.683-.895 1.066-1.446.272-.393.617-.442.978-.306.367.13 2.356 1.112 2.76 1.312.404.2.67.3.768.47.097.168.097.97-.225 1.878z"/></svg>
+        Order on WhatsApp
+      </a>
+      <div class="modal-wa-note">You'll be taken to WhatsApp with this piece pre-filled</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ FLOATING WHATSAPP ============ -->
+<a href="#" class="wa-float" id="floatWa" aria-label="WhatsApp">
+  <svg viewBox="0 0 64 64" width="60" height="60" aria-hidden="true"><rect x="0" y="0" width="64" height="64" rx="15" fill="#25D366"/><path d="M14 50l2.55-9.3A17.8 17.8 0 0 1 14 31.6C14 21.87 21.9 14 31.6 14S49.3 21.87 49.3 31.6 41.4 49.2 31.6 49.2c-2.98 0-5.9-.75-8.48-2.18L14 50zm10.03-5.9l.55.33a14.5 14.5 0 0 0 7.02 1.92c8.02 0 14.55-6.5 14.55-14.52S39.62 17.3 31.6 17.3 17.05 23.8 17.05 31.6c0 2.66.73 5.26 2.12 7.52l.35.56-1.5 5.5 5.5-1.48z" fill="#fff"/><path d="M27.2 23.9c-.33-.74-.68-.76-1-.77l-.85-.01c-.3 0-.78.11-1.19.56-.41.45-1.56 1.52-1.56 3.71s1.6 4.3 1.82 4.6c.22.3 3.1 4.96 7.65 6.75 3.78 1.49 4.55 1.19 5.37 1.12.82-.07 2.65-1.08 3.02-2.13.37-1.05.37-1.94.26-2.13-.11-.19-.41-.3-.85-.52-.44-.22-2.61-1.29-3.02-1.44-.41-.15-.7-.22-1 .22-.3.44-1.15 1.44-1.4 1.74-.26.3-.52.33-.96.11-.44-.22-1.86-.69-3.55-2.19-1.31-1.17-2.2-2.61-2.45-3.05-.26-.44-.03-.68.19-.9.2-.2.44-.52.66-.78.22-.26.29-.44.44-.74.15-.3.07-.55-.04-.77-.11-.22-.97-2.42-1.36-3.31z" fill="#fff"/></svg>
+</a>
+
+<script>
+/* =================================================================
+   EDIT YOUR SHOP HERE
+   -----------------------------------------------------------------
+   1. WHATSAPP_NUMBER  → your number, country code, no + or spaces
+   2. PRODUCTS array   → add / edit / remove your jewellery pieces
+      - img: paste an image URL (or upload photos to your host and
+             use the filename, e.g. "images/ring1.jpg")
+      - badge: optional little tag ("New", "Bestseller") or ""
+   ================================================================= */
+
+let WHATSAPP_NUMBER = "919099774500";
+let PRODUCTS = [];
+let CATEGORIES = [];
+let HERO_SLIDES = [];
+
+/* ---------- Build WhatsApp link ---------- */
+function waLink(text){
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+}
+const genericMsg = "Hi Aevon Creation! I'd like to know more about your jewellery pieces. 😊";
+function refreshWaLinks(){
+  document.getElementById('floatWa').href = waLink(genericMsg);
+  document.getElementById('mainWa').href  = waLink(genericMsg);
+  document.getElementById('footWa').href  = waLink(genericMsg);
+}
+
+/* ---------- Render filters ---------- */
+const filtersEl = document.getElementById('filters');
+function renderFilters(){
+  const cats = ["All", ...new Set(PRODUCTS.map(p=>p.cat))];
+  filtersEl.innerHTML='';
+  cats.forEach((c,i)=>{
+    const b=document.createElement('button');
+    b.className='filter'+(i===0?' active':'');
+    b.textContent=c; b.onclick=()=>{setFilter(c,b)};
+    filtersEl.appendChild(b);
+  });
+}
+
+/* ---------- Render products ---------- */
+const grid=document.getElementById('grid');
+function render(list){
+  grid.innerHTML='';
+  list.forEach((p,idx)=>{
+    const realIndex = PRODUCTS.indexOf(p);
+    const card=document.createElement('div');
+    card.className='card reveal';
+    const faved = isWished(realIndex);
+    card.innerHTML=`
+      <div class="card-img">
+        ${p.badge?`<span class="badge">${p.badge}</span>`:''}
+        <button class="card-heart${faved?' active':''}" data-idx="${realIndex}" aria-label="Add to wishlist">
+          <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.7-7-9.5A3.9 3.9 0 0 1 12 7a3.9 3.9 0 0 1 7 3.5C19 15.3 12 20 12 20z" stroke-linejoin="round"/></svg>
+        </button>
+        <img src="${p.imgs[0]}" alt="${p.name}" loading="lazy">
+      </div>
+      <div class="cat">${p.cat}</div>
+      <h3>${p.name}</h3>
+      <div class="price">${p.price}</div>`;
+    card.querySelector('.card-img img').onclick=()=>openModal(realIndex);
+    card.querySelector('.cat').onclick=()=>openModal(realIndex);
+    card.querySelector('h3').onclick=()=>openModal(realIndex);
+    card.querySelector('.price').onclick=()=>openModal(realIndex);
+    const heart=card.querySelector('.card-heart');
+    heart.onclick=(e)=>{e.stopPropagation();toggleWish(realIndex);heart.classList.toggle('active');};
+    grid.appendChild(card);
+  });
+  observeReveals();
+}
+
+function setFilter(c,btn){
+  document.querySelectorAll('.filter').forEach(f=>f.classList.remove('active'));
+  btn.classList.add('active');
+  render(c==="All"?PRODUCTS:PRODUCTS.filter(p=>p.cat===c));
+}
+function filterTo(cat){
+  document.querySelectorAll('.filter').forEach(f=>{
+    f.classList.toggle('active', f.textContent===cat);
+  });
+  render(PRODUCTS.filter(p=>p.cat===cat));
+  document.getElementById('shop').scrollIntoView({behavior:'smooth'});
+}
+
+/* ---------- Modal ---------- */
+const modalBg=document.getElementById('modalBg');
+function openModal(i){
+  const p=PRODUCTS[i];
+  const thumbs = p.imgs.length>1
+    ? `<div class="thumbs">${p.imgs.map((src,ix)=>
+        `<div class="thumb${ix===0?' active':''}" onclick="swapMainImg(this,'${src}')"><img src="${src}" alt=""></div>`
+      ).join('')}</div>`
+    : '';
+  document.getElementById('mImg').innerHTML=`<img id="mMainImg" src="${p.imgs[0]}" alt="${p.name}">${thumbs}`;
+  document.getElementById('mCat').textContent=p.cat;
+  document.getElementById('mName').textContent=p.name;
+  document.getElementById('mPrice').textContent=p.price;
+  document.getElementById('mDesc').textContent=p.desc;
+  const dl=document.getElementById('mDetails'); dl.innerHTML='';
+  for(const k in p.details){
+    dl.innerHTML+=`<li>${k}<span>${p.details[k]}</span></li>`;
+  }
+  const msg=`Hi Aevon Creation! 👋\n\nI'd like to order this piece:\n\n✨ *${p.name}*\nCategory: ${p.cat}\nPrice: ${p.price}\n\nIs it available?`;
+  document.getElementById('mWa').href=waLink(msg);
+  modalBg.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function swapMainImg(el,src){
+  document.getElementById('mMainImg').src=src;
+  document.querySelectorAll('.thumb').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+}
+function closeModal(){modalBg.classList.remove('open');document.body.style.overflow=''}
+document.getElementById('modalClose').onclick=closeModal;
+modalBg.onclick=e=>{if(e.target===modalBg)closeModal()};
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+/* ---------- Mobile menu ---------- */
+document.getElementById('menuBtn').onclick=()=>{
+  document.getElementById('navLinks').classList.toggle('show');
+};
+document.querySelectorAll('#navLinks a').forEach(a=>{
+  a.onclick=()=>document.getElementById('navLinks').classList.remove('show');
+});
+
+/* ---------- Scroll reveal ---------- */
+let io;
+function observeReveals(){
+  const els=document.querySelectorAll('.reveal:not(.in)');
+  if(!io){
+    io=new IntersectionObserver(entries=>{
+      entries.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}});
+    },{threshold:.12});
+  }
+  els.forEach(el=>io.observe(el));
+}
+
+/* =================================================================
+   EDIT YOUR REVIEWS HERE
+   -----------------------------------------------------------------
+   Add / edit / remove customer reviews below.
+   stars: 1 to 5   |   name: customer name   |   text: their review
+   ================================================================= */
+let REVIEWS = [];
+const reviewsGrid=document.getElementById('reviewsGrid');
+function renderReviews(){
+  if(!reviewsGrid) return;
+  reviewsGrid.innerHTML='';
+  REVIEWS.forEach(r=>{
+    const stars='★'.repeat(r.stars)+'☆'.repeat(5-r.stars);
+    const el=document.createElement('div');
+    el.className='review reveal';
+    el.innerHTML=`
+      <div class="stars">${stars}</div>
+      <div class="text">"${r.text}"</div>
+      <div class="who">
+        <div class="avatar">${r.name.charAt(0)}</div>
+        <div>
+          <div class="name">${r.name}</div>
+          <div class="role">${r.place||'Verified buyer'}</div>
+        </div>
+      </div>`;
+    reviewsGrid.appendChild(el);
+  });
+}
+
+/* ---------- Announcement bar ---------- */
+let ANNOUNCEMENTS = [];
+function startAnnouncements(){
+  const el=document.getElementById('announceText');
+  if(!el || ANNOUNCEMENTS.length<1) return;
+  el.textContent=ANNOUNCEMENTS[0];
+  if(ANNOUNCEMENTS.length<2) return;
+  let i=0;
+  setInterval(()=>{
+    el.classList.add('fade');
+    setTimeout(()=>{
+      i=(i+1)%ANNOUNCEMENTS.length;
+      el.textContent=ANNOUNCEMENTS[i];
+      el.classList.remove('fade');
+    },400);
+  },3000);
+}
+
+/* ---------- Trust badges slideshow ---------- */
+(function(){
+  const items=document.querySelectorAll('#trustSlider .trust-item');
+  const dotsWrap=document.getElementById('trustDots');
+  if(!items.length) return;
+  let cur=0, timer;
+  items.forEach((_,i)=>{
+    const d=document.createElement('button');
+    if(i===0)d.classList.add('active');
+    d.setAttribute('aria-label','Feature '+(i+1));
+    d.onclick=()=>{go(i);reset()};
+    dotsWrap.appendChild(d);
+  });
+  const dots=dotsWrap.querySelectorAll('button');
+  function go(n){
+    items[cur].classList.remove('active');dots[cur].classList.remove('active');
+    cur=n;
+    items[cur].classList.add('active');dots[cur].classList.add('active');
+  }
+  function next(){go((cur+1)%items.length)}
+  function reset(){clearInterval(timer);timer=setInterval(next,3000)}
+  reset();
+})();
+
+/* ---------- Hero slideshow ---------- */
+function startHero(){
+  const wrap=document.getElementById('slideshow');
+  const dotsWrap=document.getElementById('slideDots');
+  if(!wrap) return;
+  wrap.innerHTML=''; dotsWrap.innerHTML='';
+  const imgs = HERO_SLIDES.length ? HERO_SLIDES : ['images/hero-1.jpeg'];
+  imgs.forEach((src,i)=>{
+    const s=document.createElement('div');
+    s.className='slide'+(i===0?' active':'');
+    s.style.backgroundImage="url('"+src+"')";
+    wrap.appendChild(s);
+    const d=document.createElement('button');
+    if(i===0)d.classList.add('active');
+    d.setAttribute('aria-label','Slide '+(i+1));
+    d.onclick=()=>{go(i);reset()};
+    dotsWrap.appendChild(d);
+  });
+  const slides=wrap.querySelectorAll('.slide');
+  const dots=dotsWrap.querySelectorAll('button');
+  let cur=0, timer;
+  function go(n){
+    slides[cur].classList.remove('active');dots[cur].classList.remove('active');
+    cur=n;
+    slides[cur].classList.add('active');dots[cur].classList.add('active');
+  }
+  function next(){go((cur+1)%slides.length)}
+  function reset(){clearInterval(timer);if(slides.length>1)timer=setInterval(next,4000)}
+  reset();
+}
+
+/* ---------- Collections ---------- */
+function renderCollections(){
+  const wrap=document.getElementById('collections-grid');
+  if(!wrap) return;
+  wrap.innerHTML='';
+  CATEGORIES.forEach(c=>{
+    const card=document.createElement('div');
+    card.className='coll-card reveal';
+    card.innerHTML=`<img src="${c.image}" alt="${c.name}"><div class="label">${c.name}</div>`;
+    card.onclick=()=>filterTo(c.name);
+    wrap.appendChild(card);
+  });
+}
+
+/* ---------- Wishlist ---------- */
+let WISHLIST = [];
+function isWished(idx){return WISHLIST.includes(idx);}
+function toggleWish(idx){
+  const i=WISHLIST.indexOf(idx);
+  if(i>=0) WISHLIST.splice(i,1);
+  else WISHLIST.push(idx);
+  updateWishCount();
+  renderWishlist();
+}
+function updateWishCount(){
+  const c=document.getElementById('wishCount');
+  c.textContent=WISHLIST.length;
+  c.classList.toggle('empty',WISHLIST.length===0);
+}
+function renderWishlist(){
+  const body=document.getElementById('wishBody');
+  if(!WISHLIST.length){
+    body.innerHTML='<div class="wish-empty">Your wishlist is empty.<br>Tap the ♡ on any piece to save it here.</div>';
+    return;
+  }
+  body.innerHTML='';
+  WISHLIST.forEach(idx=>{
+    const p=PRODUCTS[idx];
+    const row=document.createElement('div');
+    row.className='wish-row';
+    row.innerHTML=`
+      <img src="${p.imgs[0]}" alt="${p.name}">
+      <div class="wr-info">
+        <div class="wr-name">${p.name}</div>
+        <div class="wr-price">${p.price}</div>
+      </div>
+      <button class="wr-remove" aria-label="Remove">✕</button>`;
+    row.querySelector('img').onclick=()=>{closeWish();openModal(idx);};
+    row.querySelector('.wr-info').onclick=()=>{closeWish();openModal(idx);};
+    row.querySelector('.wr-remove').onclick=()=>{
+      toggleWish(idx);
+      const heart=document.querySelector('.card-heart[data-idx="'+idx+'"]');
+      if(heart) heart.classList.remove('active');
+    };
+    body.appendChild(row);
+  });
+}
+function openWish(){document.getElementById('wishOverlay').classList.add('open');document.body.style.overflow='hidden';}
+function closeWish(){document.getElementById('wishOverlay').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('wishBtn').onclick=openWish;
+document.getElementById('wishClose').onclick=closeWish;
+document.getElementById('wishOverlay').onclick=e=>{if(e.target.id==='wishOverlay')closeWish();};
+
+/* ---------- Search ---------- */
+function openSearch(){
+  document.getElementById('searchOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  setTimeout(()=>document.getElementById('searchInput').focus(),50);
+}
+function closeSearch(){
+  document.getElementById('searchOverlay').classList.remove('open');
+  document.body.style.overflow='';
+  document.getElementById('searchInput').value='';
+  document.getElementById('searchResults').innerHTML='';
+}
+document.getElementById('searchBtn').onclick=openSearch;
+document.getElementById('searchClose').onclick=closeSearch;
+document.getElementById('searchOverlay').onclick=e=>{if(e.target.id==='searchOverlay')closeSearch();};
+document.getElementById('searchInput').addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  const box=document.getElementById('searchResults');
+  if(!q){box.innerHTML='';return;}
+  const hits=PRODUCTS.map((p,i)=>({p,i})).filter(({p})=>
+    p.name.toLowerCase().includes(q)||p.cat.toLowerCase().includes(q)||(p.desc&&p.desc.toLowerCase().includes(q))
+  );
+  if(!hits.length){box.innerHTML='<div class="search-empty">No pieces found for "'+this.value+'"</div>';return;}
+  box.innerHTML='';
+  hits.forEach(({p,i})=>{
+    const el=document.createElement('div');
+    el.className='search-item';
+    el.innerHTML=`<img src="${p.imgs[0]}" alt="${p.name}"><div><div class="si-name">${p.name}</div><div class="si-price">${p.price}</div></div>`;
+    el.onclick=()=>{closeSearch();openModal(i);};
+    box.appendChild(el);
+  });
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSearch();closeWish();}});
+
+/* ---------- Init: load content from CMS data, then render ---------- */
+function normalizeProduct(p){
+  return {
+    name: p.name || '',
+    cat: p.category || p.cat || 'Necklaces',
+    price: p.price || '',
+    badge: p.badge || '',
+    bestseller: !!p.bestseller,
+    imgs: (p.images || p.imgs || []).length ? (p.images || p.imgs) : ['images/hero-1.jpeg'],
+    desc: p.description || p.desc || '',
+    details: Array.isArray(p.details)
+      ? p.details.reduce((o,d)=>{ if(d && d.key) o[d.key]=d.value; return o; },{})
+      : (p.details || {})
+  };
+}
+
+function applyData(data){
+  WHATSAPP_NUMBER = data.whatsapp || WHATSAPP_NUMBER;
+  PRODUCTS = (data.products || []).map(normalizeProduct);
+  CATEGORIES = data.categories || [];
+  HERO_SLIDES = data.hero || [];
+  REVIEWS = data.reviews || [];
+  ANNOUNCEMENTS = data.announcements || [];
+
+  refreshWaLinks();
+  startHero();
+  renderCollections();
+  renderFilters();
+  render(PRODUCTS);
+  renderReviews();
+  startAnnouncements();
+  updateWishCount();
+  renderWishlist();
+  observeReveals();
+}
+
+// Fallback data so the site still works if data.json is missing (e.g. local preview)
+const FALLBACK = {
+  whatsapp: "919099774500",
+  hero: ["images/hero-1.jpeg","images/hero-2.jpeg","images/hero-3.jpeg"],
+  categories: [
+    { name:"Earrings", image:"https://images.unsplash.com/photo-1635767798638-3e25273a8236?w=700&q=80" },
+    { name:"Necklaces", image:"https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=700&q=80" },
+    { name:"Bracelets", image:"https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=700&q=80" }
+  ],
+  announcements: ["FREE SHIPPING ON PREPAID ORDERS OVER ₹999","LONG LASTING JEWELLERY","OVER 5000+ ORDERS SHIPPED","CASH ON DELIVERY AVAILABLE"],
+  reviews: [
+    { stars:5, name:"Priya S.", place:"Mumbai", text:"Absolutely loved the butterfly necklace! The colours shine beautifully and it feels premium." },
+    { stars:5, name:"Ananya R.", place:"Delhi", text:"The fish pendant is even prettier in person. Delicate and perfect for daily wear." },
+    { stars:5, name:"Sneha P.", place:"Ahmedabad", text:"Gifted the couple necklace to my sister and she adored it. Lovely packaging and quick service." }
+  ],
+  products: [
+    { name:"Crystal Fish Pendant Necklace", category:"Necklaces", price:"₹1,299", badge:"New", bestseller:true,
+      images:["images/fish-1.jpeg","images/fish-2.jpeg","images/fish-3.jpeg"],
+      description:"A playful angelfish pendant set with clear baguette crystals and a black stone eye, on a fine gold chain.",
+      details:[{key:"Finish",value:"18k gold plated"},{key:"Stone",value:"Cubic zirconia + black CZ eye"}] },
+    { name:"Iridescent Butterfly Necklace", category:"Necklaces", price:"₹1,499", badge:"Bestseller", bestseller:true,
+      images:["images/butterfly-1.jpeg","images/butterfly-2.jpeg","images/butterfly-3.jpeg"],
+      description:"A crystal butterfly pendant with soft rainbow shimmer that catches the light beautifully.",
+      details:[{key:"Finish",value:"18k gold plated"},{key:"Stone",value:"Iridescent crystal"}] },
+    { name:"Little Couple Necklace", category:"Necklaces", price:"₹1,599", badge:"New", bestseller:false,
+      images:["images/couple-1.jpeg","images/couple-2.jpeg","images/couple-3.jpeg"],
+      description:"An adorable boy-and-girl pendant sharing a heart, detailed with sparkling blue and pink stones.",
+      details:[{key:"Finish",value:"18k gold plated"},{key:"Stone",value:"Multi-colour CZ"}] }
+  ]
+};
+
+fetch('content/data.json')
+  .then(r => r.ok ? r.json() : Promise.reject())
+  .then(applyData)
+  .catch(() => applyData(FALLBACK));
+
+</script>
+</body>
+</html>

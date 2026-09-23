@@ -1,0 +1,134 @@
+{
+  "products": [
+    {
+      "name": "Crystal Fish Pendant Necklace",
+      "price": "₹1,299",
+      "category": "Necklaces",
+      "badge": "New",
+      "bestseller": true,
+      "description": "A playful angelfish pendant set with clear baguette crystals and a black stone eye, on a fine gold chain. Light, cheerful and easy to wear every day.",
+      "images": [
+        "images/fish-1.jpeg",
+        "images/fish-2.jpeg",
+        "images/fish-3.jpeg"
+      ],
+      "details": [
+        {
+          "key": "Finish",
+          "value": "18k gold plated"
+        },
+        {
+          "key": "Stone",
+          "value": "Cubic zirconia + black CZ eye"
+        },
+        {
+          "key": "Chain",
+          "value": "16-18 in adjustable"
+        }
+      ],
+      "order": 1
+    },
+    {
+      "name": "Iridescent Butterfly Necklace",
+      "price": "₹1,499",
+      "category": "Necklaces",
+      "badge": "Bestseller",
+      "bestseller": true,
+      "description": "A crystal butterfly pendant with soft rainbow shimmer that catches the light beautifully. Suspended on a delicate gold snake chain.",
+      "images": [
+        "images/butterfly-1.jpeg",
+        "images/butterfly-2.jpeg",
+        "images/butterfly-3.jpeg"
+      ],
+      "details": [
+        {
+          "key": "Finish",
+          "value": "18k gold plated"
+        },
+        {
+          "key": "Stone",
+          "value": "Iridescent crystal"
+        },
+        {
+          "key": "Chain",
+          "value": "Snake chain"
+        }
+      ],
+      "order": 2
+    },
+    {
+      "name": "Little Couple Necklace",
+      "price": "₹1,599",
+      "category": "Necklaces",
+      "badge": "New",
+      "bestseller": false,
+      "description": "An adorable boy-and-girl pendant sharing a heart, detailed with sparkling blue and pink stones. A sweet gift for couples and loved ones.",
+      "images": [
+        "images/couple-1.jpeg",
+        "images/couple-2.jpeg",
+        "images/couple-3.jpeg"
+      ],
+      "details": [
+        {
+          "key": "Finish",
+          "value": "18k gold plated"
+        },
+        {
+          "key": "Stone",
+          "value": "Multi-colour CZ"
+        },
+        {
+          "key": "Chain",
+          "value": "16-18 in adjustable"
+        }
+      ],
+      "order": 3
+    }
+  ],
+  "hero": [
+    "images/hero-1.jpeg",
+    "images/hero-2.jpeg",
+    "images/hero-3.jpeg"
+  ],
+  "categories": [
+    {
+      "name": "Earrings",
+      "image": "https://images.unsplash.com/photo-1635767798638-3e25273a8236?w=700&q=80"
+    },
+    {
+      "name": "Necklaces",
+      "image": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=700&q=80"
+    },
+    {
+      "name": "Bracelets",
+      "image": "https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=700&q=80"
+    }
+  ],
+  "whatsapp": "919099774500",
+  "announcements": [
+    "FREE SHIPPING ON PREPAID ORDERS OVER ₹999",
+    "LONG LASTING JEWELLERY",
+    "OVER 5000+ ORDERS SHIPPED",
+    "CASH ON DELIVERY AVAILABLE"
+  ],
+  "reviews": [
+    {
+      "stars": 5,
+      "name": "Priya S.",
+      "place": "Mumbai",
+      "text": "Absolutely loved the butterfly necklace! The colours shine beautifully and it feels premium. Ordering on WhatsApp was so easy."
+    },
+    {
+      "stars": 5,
+      "name": "Ananya R.",
+      "place": "Delhi",
+      "text": "The fish pendant is even prettier in person. Delicate and perfect for daily wear. Will order again for sure!"
+    },
+    {
+      "stars": 5,
+      "name": "Sneha P.",
+      "place": "Ahmedabad",
+      "text": "Gifted the couple necklace to my sister and she adored it. Lovely packaging and quick, friendly service."
+    }
+  ]
+}

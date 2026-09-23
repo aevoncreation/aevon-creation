@@ -1,0 +1,92 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "images/uploads"
+
+site_url: https://aevoncreation.com
+display_url: https://aevoncreation.com
+
+collections:
+  # ---------------- PRODUCTS ----------------
+  - name: "products"
+    label: "Products"
+    label_singular: "Product"
+    folder: "content/products"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{name}} — {{price}}"
+    sortable_fields: ['name', 'price', 'category']
+    fields:
+      - { label: "Product Name", name: "name", widget: "string" }
+      - { label: "Price (e.g. ₹1,299)", name: "price", widget: "string" }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options: ["Necklaces", "Earrings", "Bracelets", "Rings", "Anklets"]
+      - { label: "Badge (optional, e.g. New / Bestseller)", name: "badge", widget: "string", required: false, default: "" }
+      - { label: "Show in Bestsellers?", name: "bestseller", widget: "boolean", default: false }
+      - { label: "Description", name: "description", widget: "text" }
+      - label: "Photos (first one is the cover)"
+        name: "images"
+        widget: "list"
+        field: { label: "Photo", name: "image", widget: "image" }
+      - label: "Extra Details (optional)"
+        name: "details"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Label (e.g. Finish)", name: "key", widget: "string" }
+          - { label: "Value (e.g. 18k gold plated)", name: "value", widget: "string" }
+      - { label: "Sort Order (smaller shows first)", name: "order", widget: "number", required: false, default: 100 }
+
+  # ---------------- HERO SLIDESHOW ----------------
+  - name: "hero"
+    label: "Hero Slideshow"
+    files:
+      - name: "hero"
+        label: "Hero Photos"
+        file: "content/hero.json"
+        fields:
+          - label: "Slides (home page top banners)"
+            name: "slides"
+            widget: "list"
+            field: { label: "Banner Photo", name: "image", widget: "image" }
+
+  # ---------------- CATEGORIES ----------------
+  - name: "categories"
+    label: "Collections (Categories)"
+    files:
+      - name: "categories"
+        label: "Category Cards"
+        file: "content/categories.json"
+        fields:
+          - label: "Categories"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "Name (must match product category)", name: "name", widget: "string" }
+              - { label: "Photo", name: "image", widget: "image" }
+
+  # ---------------- SETTINGS ----------------
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - name: "general"
+        label: "General"
+        file: "content/settings.json"
+        fields:
+          - { label: "WhatsApp Number (with country code, no +)", name: "whatsapp", widget: "string", default: "919099774500" }
+          - label: "Announcement Bar Messages (rotating top strip)"
+            name: "announcements"
+            widget: "list"
+            field: { label: "Message", name: "text", widget: "string" }
+          - label: "Reviews"
+            name: "reviews"
+            widget: "list"
+            fields:
+              - { label: "Stars (1-5)", name: "stars", widget: "number", default: 5, min: 1, max: 5 }
+              - { label: "Customer Name", name: "name", widget: "string" }
+              - { label: "City", name: "place", widget: "string", required: false }
+              - { label: "Review Text", name: "text", widget: "text" }

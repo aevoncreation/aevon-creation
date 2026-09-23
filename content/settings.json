@@ -1,0 +1,14 @@
+{
+  "whatsapp": "919099774500",
+  "announcements": [
+    { "text": "FREE SHIPPING ON PREPAID ORDERS OVER ₹999" },
+    { "text": "LONG LASTING JEWELLERY" },
+    { "text": "OVER 5000+ ORDERS SHIPPED" },
+    { "text": "CASH ON DELIVERY AVAILABLE" }
+  ],
+  "reviews": [
+    { "stars": 5, "name": "Priya S.", "place": "Mumbai", "text": "Absolutely loved the butterfly necklace! The colours shine beautifully and it feels premium. Ordering on WhatsApp was so easy." },
+    { "stars": 5, "name": "Ananya R.", "place": "Delhi", "text": "The fish pendant is even prettier in person. Delicate and perfect for daily wear. Will order again for sure!" },
+    { "stars": 5, "name": "Sneha P.", "place": "Ahmedabad", "text": "Gifted the couple necklace to my sister and she adored it. Lovely packaging and quick, friendly service." }
+  ]
+}
