@@ -1,6 +1,6 @@
 ---
 name: Little Couple Necklace
-price: ₹999
+price: ₹1999
 category: Necklaces
 badge: New
 bestseller: false
