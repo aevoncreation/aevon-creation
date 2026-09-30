@@ -14,5 +14,7 @@ details:
     value: Multi-colour CZ
   - key: Chain
     value: 16-18 in adjustable
+  - key: Finish
+    value: "Diamond coated finishing "
 order: 3
 ---
